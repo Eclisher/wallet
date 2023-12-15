@@ -15,13 +15,14 @@ BEGIN
             COALESCE(SUM(t.amount), 0) AS total_amount
         FROM category c
                  LEFT JOIN transaction t ON c.id = t.category_id
-            AND t.account = account_id
             AND t.transaction_datetime BETWEEN start_datetime AND end_datetime
+        WHERE t.account = account_id  -- La condition est déplacée ici
         GROUP BY c.name;
 
     RETURN;
 END;
 $$ LANGUAGE plpgsql;
+
 
 -- Exemple d'appel de la fonction
 SELECT * FROM calculate_category_amounts('account_id1', '2023-01-01', '2023-12-31');

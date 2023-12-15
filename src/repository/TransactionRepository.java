@@ -3,6 +3,8 @@ package repository;
 import lombok.AllArgsConstructor;
 import model.Transaction;
 import model.TransactionType;
+import model.CategoryAmount;
+
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -72,4 +74,14 @@ public class TransactionRepository implements BasicRepository<Transaction>{
             toSave.setId(id);
         return toSave;
     }
+    public Transaction findById(String id) throws SQLException {
+        Map<String, Pair> filters = Map.of(Query.ID_LABEL, new Pair(id, true));
+        ResultSet resultSet = Query.selectAll(TABLE_NAME, filters, null);
+
+        if (resultSet.next()) {
+            return createInstance(resultSet);
+        }
+        return null;
+    }
+
 }

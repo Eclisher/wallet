@@ -36,11 +36,9 @@ public class BalanceCalculator {
                     }
                 }
             }
-
             if (totalWeight == 0) {
                 return 0; // Avoid division by zero
             }
-
             double weightedAverage = totalValue / totalWeight;
             return weightedAverage;
 
