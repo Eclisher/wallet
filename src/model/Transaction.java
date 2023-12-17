@@ -1,6 +1,5 @@
 package model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,6 +14,9 @@ public class Transaction {
     private BigDecimal amount;
     private LocalDateTime transactionDatetime;
     private TransactionType type;
+    private String categoryId;
+
+
 
     public Transaction(String id, String label, BigDecimal amount, LocalDateTime transactionDatetime, TransactionType type) {
         this.id = id;
@@ -22,48 +24,38 @@ public class Transaction {
         this.amount = amount;
         this.transactionDatetime = transactionDatetime;
         this.type = type;
+        this.categoryId = categoryId;
     }
-
     public String getId() {
         return id;
     }
-
     public void setId(String id) {
         this.id = id;
     }
-
     public String getLabel() {
         return label;
     }
-
     public void setLabel(String label) {
         this.label = label;
     }
-
     public BigDecimal getAmount() {
         return amount;
     }
-
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
-
     public LocalDateTime getTransactionDatetime() {
         return transactionDatetime;
     }
-
     public void setTransactionDatetime(LocalDateTime transactionDatetime) {
         this.transactionDatetime = transactionDatetime;
     }
-
     public TransactionType getType() {
         return type;
     }
-
     public void setType(TransactionType type) {
         this.type = type;
     }
-
     @Override
     public String toString() {
         return "Transaction{" +

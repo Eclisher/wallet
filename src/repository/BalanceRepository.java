@@ -23,8 +23,6 @@ public class BalanceRepository implements BasicRepository<Balance>{
             resultSet.getTimestamp(CREATION_DATETIME).toLocalDateTime()
         );
     }
-
-
     @Override
     public List<Balance> findAll(Map<String, Pair> filters) throws SQLException {
         List<Balance> results = new ArrayList<>();
@@ -34,7 +32,6 @@ public class BalanceRepository implements BasicRepository<Balance>{
         }
         return results;
     }
-
     @Override
     public List<Balance> saveAll(List<Balance> toSave, String meta) {
         List<Balance> result = new ArrayList<>();
@@ -47,7 +44,6 @@ public class BalanceRepository implements BasicRepository<Balance>{
         });
         return result;
     }
-
     @Override
     public Balance save(Balance toSave, String idAccount) throws SQLException {
         LocalDateTime dateTime = toSave.getCreationDatetime();
@@ -57,9 +53,7 @@ public class BalanceRepository implements BasicRepository<Balance>{
             CREATION_DATETIME, new Pair(dateTime != null ? dateTime.toString() : null,true),
             ACCOUNT_LABEL, new Pair(idAccount,true)
         );
-
         String id = Query.saveOrUpdate(TABLE_NAME, values);
-
         if(id != null)
             toSave.setId(id);
         return toSave;

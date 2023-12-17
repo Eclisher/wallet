@@ -1,8 +1,14 @@
 package repository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import model.CategoryAmount;
+import model.Transaction;
+
+import java.math.BigDecimal;
+import java.sql.*;
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class TransactionCategorization {
 
@@ -11,6 +17,14 @@ public class TransactionCategorization {
     private static final String COLUMN_ID = "\"id\"";
 
     public static void associerTransactionACategorie(String transactionId, String categoryId) {
+        // Associer la transaction à la catégorie dans la base de données
+        updateTransactionCategory(transactionId, categoryId);
+
+        // Mettre à jour les montants de catégorie
+        updateCategoryAmounts(transactionId);
+    }
+
+    private static void updateTransactionCategory(String transactionId, String categoryId) {
         String updateQuery = String.format("UPDATE %s SET %s = ? WHERE %s = ?", TABLE_TRANSACTION, COLUMN_CATEGORY_ID, COLUMN_ID);
 
         try (Connection connection = PostgresqlConnection.getConnection();
@@ -33,5 +47,28 @@ public class TransactionCategorization {
         }
     }
 
+    private static void updateCategoryAmounts(String transactionId) {
+        try {
+            // Récupérer la transaction mise à jour
+            TransactionRepository transactionRepository = new TransactionRepository();
+            Transaction updatedTransaction = transactionRepository.findById(transactionId);
 
+            // Récupérer la catégorie associée à la transaction
+            String categoryId = updatedTransaction.getCategoryId();
+
+            // Récupérer le montant de la transaction
+            BigDecimal transactionAmount = updatedTransaction.getAmount();
+
+            // Mettre à jour le montant de la catégorie
+            CategoryRepository categoryRepository = new     CategoryRepository();
+            CategoryAmount categoryAmount = categoryRepository.findCategoryAmount(categoryId);
+            BigDecimal updatedAmount = categoryAmount.getAmount().add(transactionAmount);
+            categoryRepository.updateCategoryAmount(categoryId, updatedAmount);
+
+            System.out.println("Montant de catégorie mis à jour avec succès.");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

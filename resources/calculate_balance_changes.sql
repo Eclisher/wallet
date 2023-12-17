@@ -16,8 +16,8 @@ BEGIN
       AND type = 'CREDIT'
       AND transaction_datetime BETWEEN start_datetime AND end_datetime;
 
-    -- Soustraire la somme des sorties (débits)
-    SELECT COALESCE(SUM(amount), 0)
+    -- Ajouter la somme des sorties (débits)
+    SELECT total_changes + COALESCE(SUM(amount), 0)
     INTO total_changes
     FROM transaction
     WHERE account = account_id

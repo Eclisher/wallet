@@ -21,7 +21,6 @@ public class CurrencyRepository implements BasicRepository<Currency>{
             resultSet.getString(CODE_LABEL)
         );
     }
-
     @Override
     public List<Currency> findAll(Map<String, Pair> filters) throws SQLException {
         List<Currency> results = new ArrayList<>();
@@ -31,7 +30,6 @@ public class CurrencyRepository implements BasicRepository<Currency>{
         }
         return results;
     }
-
     @Override
     public List<Currency> saveAll(List<Currency> toSave, String meta) {
         List<Currency> result = new ArrayList<>();
@@ -44,7 +42,6 @@ public class CurrencyRepository implements BasicRepository<Currency>{
         });
         return result;
     }
-
     @Override
     public Currency save(Currency toSave, String meta) throws SQLException {
         Map<String,Pair> values = Map.of(
@@ -52,9 +49,7 @@ public class CurrencyRepository implements BasicRepository<Currency>{
             NAME_LABEL, new Pair(toSave.getName(), true),
             CODE_LABEL, new Pair(toSave.getCode(),true)
         );
-
         String id = Query.saveOrUpdate(TABLE_NAME, values);
-
         if(id != null)
             toSave.setId(id);
         return toSave;
