@@ -43,8 +43,7 @@ public class BalanceCalculator {
             return weightedAverage;
 
         } catch (SQLException e) {
-            e.printStackTrace();
-            return 0; // Handle errors appropriately
+            throw  new RuntimeException();// Handle errors appropriately
         }
     }
 

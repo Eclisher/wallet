@@ -54,7 +54,7 @@ public class AccountRepository implements BasicRepository<Account> {
             try {
                 result.add(save(el, meta));
             } catch (SQLException e) {
-                e.printStackTrace();
+                throw  new RuntimeException();
                 // Gérer l'exception de manière appropriée dans votre application
             }
         });
@@ -125,7 +125,7 @@ public class AccountRepository implements BasicRepository<Account> {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace(); // Gérer les exceptions de manière appropriée dans votre application
+            throw new RuntimeException(); // Gérer les exceptions de manière appropriée dans votre application
         }
         return categoryAmounts;
     }

@@ -19,9 +19,9 @@ public class TransactionCategorization {
     public static void associerTransactionACategorie(String transactionId, String categoryId) {
         // Associer la transaction à la catégorie dans la base de données
         updateTransactionCategory(transactionId, categoryId);
-
-        // Mettre à jour les montants de catégorie
-        updateCategoryAmounts(transactionId);
+//
+//        // Mettre à jour les montants de catégorie
+//        updateCategoryAmounts(transactionId);
     }
 
     private static void updateTransactionCategory(String transactionId, String categoryId) {
@@ -41,34 +41,34 @@ public class TransactionCategorization {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException();
         } finally {
             PostgresqlConnection.closeConnection();
         }
-    }
 
-    private static void updateCategoryAmounts(String transactionId) {
-        try {
-            // Récupérer la transaction mise à jour
-            TransactionRepository transactionRepository = new TransactionRepository();
-            Transaction updatedTransaction = transactionRepository.findById(transactionId);
 
-            // Récupérer la catégorie associée à la transaction
-            String categoryId = updatedTransaction.getCategoryId();
+//    private static void updateCategoryAmounts(String transactionId) {
+//        try {
+//            // Récupérer la transaction mise à jour
+//            Transaction updatedTransaction = getUpdatedTransaction(transactionId);
+//
+//            // Récupérer la catégorie associée à la transaction
+//            String categoryId = updatedTransaction.getCategoryId();
+//
+//            // Récupérer le montant de la transaction
+//            BigDecimal transactionAmount = updatedTransaction.getAmount();
+//
+//            // Mettre à jour le montant de la catégorie
+//            CategoryRepository categoryRepository = new CategoryRepository();
+//            CategoryAmount categoryAmount = categoryRepository.findCategoryAmount(categoryId);
+//            BigDecimal updatedAmount = categoryAmount.getAmount().add(transactionAmount);
+//            categoryRepository.updateCategoryAmount(categoryId, updatedAmount);
+//
+//            System.out.println("Montant de catégorie mis à jour avec succès.");
+//
+//        } catch (SQLException e) {
+//            throw new RuntimeException();
+//        }
 
-            // Récupérer le montant de la transaction
-            BigDecimal transactionAmount = updatedTransaction.getAmount();
-
-            // Mettre à jour le montant de la catégorie
-            CategoryRepository categoryRepository = new     CategoryRepository();
-            CategoryAmount categoryAmount = categoryRepository.findCategoryAmount(categoryId);
-            BigDecimal updatedAmount = categoryAmount.getAmount().add(transactionAmount);
-            categoryRepository.updateCategoryAmount(categoryId, updatedAmount);
-
-            System.out.println("Montant de catégorie mis à jour avec succès.");
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 }
