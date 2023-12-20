@@ -50,7 +50,11 @@ public class Main {
 //            System.out.println("Balance with weighted average: " + balance);
 //
 //        } catch (SQLException e) {
+<<<<<<< HEAD
 //            throw  new RuntimeException();
+=======
+//            e.printStackTrace();
+>>>>>>> 326c89dd8e14dcf3de0509d4bc0794d0010e8d9c
 //        } finally {
 //            PostgresqlConnection.closeConnection();
 //        }
@@ -114,6 +118,7 @@ public class Main {
 //            }
 //
 //        } catch (SQLException e) {
+<<<<<<< HEAD
 //            throw  new RuntimeException();
 //        }
 
@@ -157,6 +162,51 @@ public class Main {
         }
         // question 3
         // Créer une instance de DataMapper
+=======
+//            e.printStackTrace();
+//        }
+
+// 2)
+//        try {
+//            // Créer une nouvelle transaction
+//            Transaction transaction = new Transaction(
+//                    null,
+//                    "Sample Transaction",
+//                    BigDecimal.valueOf(500),
+//                    LocalDateTime.now(),
+//                    TransactionType.CREDIT
+//            );
+//
+//            // ID de compte pour lequel la transaction doit être effectuée
+//            String accountId = "account_id1";
+//
+//            // Effectuer la transaction et récupérer le compte mis à jour
+//            Account updatedAccount = accountRepository.doTransaction(transaction, accountId);
+//
+//            // Afficher les détails du compte mis à jour
+//            System.out.println("Updated Account ID: " + updatedAccount.getId());
+//            System.out.println("Updated Account Name: " + updatedAccount.getName());
+//            System.out.println("Updated Account Balance: " + updatedAccount.getBalance().getAmount());
+//
+//            // Exemple d'appel de la fonction calculateCategoryAmounts
+//            LocalDateTime startDateTime = LocalDateTime.of(2023, 1, 1, 0, 0);
+//            LocalDateTime endDateTime = LocalDateTime.of(2023, 12, 31, 23, 59);
+//
+//            List<CategoryAmount> categoryAmounts = accountRepository.calculateCategoryAmounts(accountId, startDateTime, endDateTime);
+//
+//            // Afficher les montants de catégorie calculés
+//            System.out.println("Category Amounts:");
+//            for (CategoryAmount categoryAmount : categoryAmounts) {
+//                System.out.println("Category: " + categoryAmount.getCategory() + ", Amount: " + categoryAmount.getAmount());
+//            }
+//
+//        } catch (SQLException e) {
+//            // Gérer les exceptions spécifiques si nécessaire
+//            e.printStackTrace();
+//        }
+        // question 3
+//        // Créer une instance de DataMapper
+>>>>>>> 326c89dd8e14dcf3de0509d4bc0794d0010e8d9c
 //        DataMapper dataMapper = new DataMapper();
 //
 //        // Définir les paramètres pour la fonction SQL (question 2)

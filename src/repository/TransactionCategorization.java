@@ -19,9 +19,15 @@ public class TransactionCategorization {
     public static void associerTransactionACategorie(String transactionId, String categoryId) {
         // Associer la transaction à la catégorie dans la base de données
         updateTransactionCategory(transactionId, categoryId);
+<<<<<<< HEAD
 //
 //        // Mettre à jour les montants de catégorie
 //        updateCategoryAmounts(transactionId);
+=======
+
+        // Mettre à jour les montants de catégorie
+        updateCategoryAmounts(transactionId);
+>>>>>>> 326c89dd8e14dcf3de0509d4bc0794d0010e8d9c
     }
 
     private static void updateTransactionCategory(String transactionId, String categoryId) {
@@ -46,7 +52,19 @@ public class TransactionCategorization {
             PostgresqlConnection.closeConnection();
         }
 
+    private static void updateCategoryAmounts(String transactionId) {
+        try {
+            // Récupérer la transaction mise à jour
+            TransactionRepository transactionRepository = new TransactionRepository();
+            Transaction updatedTransaction = transactionRepository.findById(transactionId);
 
+            // Récupérer la catégorie associée à la transaction
+            String categoryId = updatedTransaction.getCategoryId();
+
+            // Récupérer le montant de la transaction
+            BigDecimal transactionAmount = updatedTransaction.getAmount();
+
+<<<<<<< HEAD
 //    private static void updateCategoryAmounts(String transactionId) {
 //        try {
 //            // Récupérer la transaction mise à jour
@@ -70,5 +88,18 @@ public class TransactionCategorization {
 //            throw new RuntimeException();
 //        }
 
+=======
+            // Mettre à jour le montant de la catégorie
+            CategoryRepository categoryRepository = new     CategoryRepository();
+            CategoryAmount categoryAmount = categoryRepository.findCategoryAmount(categoryId);
+            BigDecimal updatedAmount = categoryAmount.getAmount().add(transactionAmount);
+            categoryRepository.updateCategoryAmount(categoryId, updatedAmount);
+
+            System.out.println("Montant de catégorie mis à jour avec succès.");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+>>>>>>> 326c89dd8e14dcf3de0509d4bc0794d0010e8d9c
     }
 }

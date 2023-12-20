@@ -54,7 +54,11 @@ public class AccountRepository implements BasicRepository<Account> {
             try {
                 result.add(save(el, meta));
             } catch (SQLException e) {
+<<<<<<< HEAD
                 throw  new RuntimeException();
+=======
+                e.printStackTrace();
+>>>>>>> 326c89dd8e14dcf3de0509d4bc0794d0010e8d9c
                 // Gérer l'exception de manière appropriée dans votre application
             }
         });
@@ -125,7 +129,11 @@ public class AccountRepository implements BasicRepository<Account> {
                 }
             }
         } catch (SQLException e) {
+<<<<<<< HEAD
             throw new RuntimeException(); // Gérer les exceptions de manière appropriée dans votre application
+=======
+            e.printStackTrace(); // Gérer les exceptions de manière appropriée dans votre application
+>>>>>>> 326c89dd8e14dcf3de0509d4bc0794d0010e8d9c
         }
         return categoryAmounts;
     }
